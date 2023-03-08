@@ -92,8 +92,8 @@ const navItems = [
   },
 ];
 
-
 const Sidebar = ({
+  user,
   drawerWidth,
   isSidebarOpen,
   setIsSidebarOpen,
@@ -109,7 +109,6 @@ const Sidebar = ({
   }, [pathname]);
   return (
     <Box component="nav">
-      {" "}
       {isSidebarOpen && (
         <Drawer
           open={isSidebarOpen}
@@ -121,7 +120,7 @@ const Sidebar = ({
             "& .MuiDrawer-paper": {
               color: theme.palette.secondary[200],
               backgroundColor: theme.palette.background.alt,
-              boxSizing: "border-box",
+              boxSixing: "border-box",
               borderWidth: isNonMobile ? 0 : "2px",
               width: drawerWidth,
             },

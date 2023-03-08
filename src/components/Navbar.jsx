@@ -27,21 +27,33 @@ import {
 const Navbar = () => {
   const dispatch = useDispatch();
   const theme = useTheme();
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const isOpen = Boolean(anchorEl);
+  const handleClick = (event) => setAnchorEl(event.currentTarget);
+  const handleClose = () => setAnchorEl(null);
+
   return (
-    <AppBar sx={{ position: "static", background: "none", boxShadow: "none" }}>
+    <AppBar
+      sx={{
+        position: "static",
+        background: "none",
+        boxShadow: "none",
+      }}
+    >
       <Toolbar sx={{ justifyContent: "space-between" }}>
+        {/* LEFT SIDE */}
         <FlexBetween>
-          <IconButton onClick={() => console.log("Open/close sidebar")}>
+          <IconButton >
             <MenuIcon />
           </IconButton>
-
           <FlexBetween
             backgroundColor={theme.palette.background.alt}
             borderRadius="9px"
             gap="3rem"
-            p="0,1rem 1.5rem"
+            p="0.1rem 1.5rem"
           >
-            <InputBase placeHolder="Search" />
+            <InputBase placeholder="Search..." />
             <IconButton>
               <Search />
             </IconButton>
@@ -49,7 +61,6 @@ const Navbar = () => {
         </FlexBetween>
 
         {/* RIGHT SIDE */}
-
         <FlexBetween gap="1.5rem">
           <IconButton onClick={() => dispatch(setMode())}>
             {theme.palette.mode === "dark" ? (
