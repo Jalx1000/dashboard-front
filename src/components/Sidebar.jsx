@@ -93,7 +93,7 @@ const navItems = [
 ];
 
 const Sidebar = ({
-  // user,
+  user,
   drawerWidth,
   isSidebarOpen,
   setIsSidebarOpen,
@@ -123,12 +123,11 @@ const Sidebar = ({
               backgroundColor: theme.palette.background.alt,
               boxSixing: "border-box",
               borderWidth: isNonMobile ? 0 : "2px",
-              width: drawerWidth
+              width: drawerWidth,
             },
           }}
         >
           <Box width="100%">
-            
             <Box m="1.5rem 2rem 2rem 3rem">
               <FlexBetween color={theme.palette.secondary.main}>
                 <Box display="flex" alignItems="center" gap="0.5rem">
@@ -193,10 +192,9 @@ const Sidebar = ({
                 );
               })}
             </List>
-
           </Box>
 
-          <Box position="absolute" bottom="2rem">
+          <Box position="absolute" bottom="1rem">
             <Divider />
             <FlexBetween textTransform="none" gap="1rem" m="1.5rem 2rem 0 3rem">
               <Box
@@ -208,7 +206,21 @@ const Sidebar = ({
                 borderRadius="50%"
                 sx={{ objectFit: "cover" }}
               />
-            
+              <Box textAlign="left">
+                <Typography
+                  fontWeight="bold"
+                  fontSize="0.9rem"
+                  sx={{ color: theme.palette.secondary[100] }}
+                >
+                  {user.name}
+                </Typography>
+                <Typography
+                  fontSize="0.8rem"
+                  sx={{ color: theme.palette.secondary[200] }}
+                >
+                  {user.occupation}
+                </Typography>
+              </Box>
               <SettingsOutlined
                 sx={{
                   color: theme.palette.secondary[300],
@@ -217,7 +229,6 @@ const Sidebar = ({
               />
             </FlexBetween>
           </Box>
-          
         </Drawer>
       )}
     </Box>
