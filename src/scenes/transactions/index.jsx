@@ -8,12 +8,13 @@ import DataGridCustomToolbar from "components/DataGridCustomToolbar";
 const Transactions = () => {
   const theme = useTheme();
 
-  //value to be sent to the backend
+  // values to be sent to the backend
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(20);
   const [sort, setSort] = useState({});
   const [search, setSearch] = useState("");
 
+  const [searchInput, setSearchInput] = useState("");
   const { data, isLoading } = useGetTransactionsQuery({
     page,
     pageSize,
@@ -29,25 +30,26 @@ const Transactions = () => {
     },
     {
       field: "userId",
-      headerName: "User Id",
-      flex: 0.5,
+      headerName: "User ID",
+      flex: 1,
     },
     {
       field: "createdAt",
-      headerName: "createdAt",
+      headerName: "CreatedAt",
       flex: 1,
     },
     {
       field: "products",
-      headerName: "# of products",
+      headerName: "# of Products",
       flex: 0.5,
-      rendeerCell: (params) => params.value.length,
+      sortable: false,
+      renderCell: (params) => params.value.length,
     },
     {
       field: "cost",
       headerName: "Cost",
       flex: 1,
-      rendeerCell: (params) => `$${Number(params.value).toFixed(2)}`,
+      renderCell: (params) => `$${Number(params.value).toFixed(2)}`,
     },
   ];
 
@@ -81,13 +83,13 @@ const Transactions = () => {
           },
         }}
       >
-
         <DataGrid
           loading={isLoading || !data}
           getRowId={(row) => row._id}
-          rows={(data && data?.transactions) || []}
+          rows={(data && data.transactions) || []}
           columns={columns}
           rowCount={(data && data.total) || 0}
+          rowsPerPageOptions={[20, 50, 100]}
           pagination
           page={page}
           pageSize={pageSize}
@@ -96,7 +98,10 @@ const Transactions = () => {
           onPageChange={(newPage) => setPage(newPage)}
           onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
           onSortModelChange={(newSortModel) => setSort(...newSortModel)}
-          components={{Toolbar: DataGridCustomToolbar}}
+          components={{ Toolbar: DataGridCustomToolbar }}
+          componentsProps={{
+            toolbar: { searchInput, setSearchInput, setSearch },
+          }}
         />
       </Box>
     </Box>
