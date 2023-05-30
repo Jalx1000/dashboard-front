@@ -4,9 +4,6 @@ import Header from "components/Header";
 import OverviewChart from "components/OverviewChart";
 
 const Overview = () => {
-  // const { data, isLoading } = useGetSalesQuery();
-  // console.log(data);
-
   const [view, setView] = useState("units");
 
   return (
